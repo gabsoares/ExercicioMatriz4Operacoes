@@ -1,4 +1,4 @@
-﻿int qtdLinhas = 0, qtdColunas = 0, operacao = 0, inicio = 0, final = 0, aleatorio;
+﻿int qtdLinhas = 0, qtdColunas = 0, operacao = 0, inicio = 0, final = 0;
 
 void EscolherDimensao(int tamanhoLinha, int tamanhoColuna)
 {
@@ -17,6 +17,24 @@ double[,] matriz1 = new double[qtdLinhas, qtdColunas];
 double[,] matriz2 = new double[qtdLinhas, qtdColunas];
 double[,] matriz3 = new double[qtdLinhas, qtdColunas];
 
+double[,] CriarMatriz(double[,] matriz, int i, int f)
+{
+    Console.Write("\nDigite a partir de qual número será gerado o aleatório: ");
+    i = int.Parse(Console.ReadLine());
+    Console.Write("Digite até qual número será gerado o aleatório: ");
+    f = int.Parse(Console.ReadLine());
+
+    for (int linha = 0; linha < qtdLinhas; linha++)
+    {
+        for (int coluna = 0; coluna < qtdColunas; coluna++)
+        {
+            matriz[linha, coluna] = new Random().Next(i, f);
+        }
+    }
+    inicio = i;
+    final = i;
+    return matriz;
+}
 void ImprimirMatriz(double[,] matriz, string titulo)
 {
     Console.WriteLine();
@@ -31,99 +49,97 @@ void ImprimirMatriz(double[,] matriz, string titulo)
     }
 }
 
-void EscolherOperacao(int opcao)
+void SomarMatriz(double[,] matriz1, double[,] matriz2)
 {
-    Console.Write("Digite: 1 - Adicao | 2 - Subtracao | 3 - Multiplicacao | 4 - Divisao: ");
-    opcao = int.Parse(Console.ReadLine());
-    switch (opcao)
+    for (int linha = 0; linha < qtdLinhas; linha++)
     {
-        case 1:
-            for (int linha = 0; linha < qtdLinhas; linha++)
-            {
-                for (int coluna = 0; coluna < qtdColunas; coluna++)
-                {
-                    matriz3[linha, coluna] = matriz1[linha, coluna] + matriz2[linha, coluna];
-                }
-            }
-            ImprimirMatriz(matriz3, "Resultado soma");
-            break;
-        case 2:
-            for (int linha = 0; linha < qtdLinhas; linha++)
-            {
-                for (int coluna = 0; coluna < qtdColunas; coluna++)
-                {
-                    matriz3[linha, coluna] = matriz1[linha, coluna] - matriz2[linha, coluna];
-                }
-            }
-            ImprimirMatriz(matriz3, "Resultado subtracao");
-            break;
-        case 3:
-            for (int linha = 0; linha < qtdLinhas; linha++)
-            {
-                for (int coluna = 0; coluna < qtdColunas; coluna++)
-                {
-                    matriz3[linha, coluna] = matriz1[linha, coluna] * matriz2[linha, coluna];
-                }
-            }
-            ImprimirMatriz(matriz3, "Resultado multiplicacao");
-            break;
-        case 4:
-            for (int linha = 0; linha < qtdLinhas; linha++)
-            {
-                for (int coluna = 0; coluna < qtdColunas; coluna++)
-                {
-                    if (matriz2[linha, coluna] != 0)
-                    {
-                        matriz3[linha, coluna] = matriz1[linha, coluna] / matriz2[linha, coluna];
-                    }
-                    else
-                    {
-                        matriz3[linha, coluna] = double.NaN;
-                    }
-                }
-            }
-            ImprimirMatriz(matriz3, "Resultado divisao");
-            break;
-        default:
-            Console.WriteLine("Apenas um dos numeros sugeridos.");
-            break;
+        for (int coluna = 0; coluna < qtdColunas; coluna++)
+        {
+            matriz3[linha, coluna] = matriz1[linha, coluna] + matriz2[linha, coluna];
+        }
     }
-    operacao = opcao;
+    ImprimirMatriz(matriz3, "Resultado adição");
 }
 
-int SortearNumero(int i, int f)
+void SubtrairMatriz(double[,] matriz1, double[,] matriz2)
 {
-    Console.Write("\nDigite a partir de qual número será gerado o aleatório: ");
-    i = int.Parse(Console.ReadLine());
-    Console.Write("Digite até qual número será gerado o aleatório: ");
-    f = int.Parse(Console.ReadLine());
-    inicio = i;
-    final = f;
-    return new Random().Next(inicio, final);
-}
-
-//Criacao da matriz 1
-for (int linha = 0; linha < qtdLinhas; linha++)
-{
-    for (int coluna = 0; coluna < qtdColunas; coluna++)
+    for (int linha = 0; linha < qtdLinhas; linha++)
     {
-        matriz1[linha, coluna] = SortearNumero(inicio, final);
-        break;
+        for (int coluna = 0; coluna < qtdColunas; coluna++)
+        {
+            matriz3[linha, coluna] = matriz1[linha, coluna] - matriz2[linha, coluna];
+        }
     }
+    ImprimirMatriz(matriz3, "Resultado subtração");
 }
 
+void MultiplicarMatriz(double[,] matriz1, double[,] matriz2)
+{
+    for (int linha = 0; linha < qtdLinhas; linha++)
+    {
+        for (int coluna = 0; coluna < qtdColunas; coluna++)
+        {
+            matriz3[linha, coluna] = matriz1[linha, coluna] * matriz2[linha, coluna];
+        }
+    }
+    ImprimirMatriz(matriz3, "Resultado multiplicação");
+}
+
+void DividirMatriz(double[,] matriz1, double[,] matriz2)
+{
+    for (int linha = 0; linha < qtdLinhas; linha++)
+    {
+        for (int coluna = 0; coluna < qtdColunas; coluna++)
+        {
+            if (matriz2[linha, coluna] != 0)
+            {
+                matriz3[linha, coluna] = matriz1[linha, coluna] / matriz2[linha, coluna];
+            }
+            else
+            {
+                matriz3[linha, coluna] = double.NaN;
+            }
+        }
+    }
+    ImprimirMatriz(matriz3, "Resultado divisão");
+}
+
+int EscolherOperacao()
+{
+    Console.Write("\nDigite: 1 - Adicao | 2 - Subtracao | 3 - Multiplicacao | 4 - Divisao: ");
+    int opcao = int.Parse(Console.ReadLine());
+
+    return opcao;
+}
+
+
+CriarMatriz(matriz1, inicio, final);
 ImprimirMatriz(matriz1, "Matriz 1");
 Console.WriteLine();
 
-//Criacao da matriz 2
-for (int linha = 0; linha < qtdLinhas; linha++)
-{
-    for (int coluna = 0; coluna < qtdColunas; coluna++)
-    {
-        matriz2[linha, coluna] = SortearNumero(inicio, final);
-    }
-}
-
+CriarMatriz(matriz2, inicio, final);
 ImprimirMatriz(matriz2, "Matriz 2");
 Console.WriteLine();
-EscolherOperacao(operacao);
+
+int opcao = EscolherOperacao();
+switch (opcao)
+{
+    case 1:
+        SomarMatriz(matriz1, matriz2);
+        break;
+
+    case 2:
+        SubtrairMatriz(matriz1, matriz2);
+        break;
+
+    case 3:
+        MultiplicarMatriz(matriz1, matriz2);
+        break;
+
+    case 4:
+        DividirMatriz(matriz1, matriz2);
+        break;
+    default:
+        Console.WriteLine("Erro");
+        break;
+}
