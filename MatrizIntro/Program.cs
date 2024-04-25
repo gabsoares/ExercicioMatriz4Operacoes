@@ -3,24 +3,32 @@ double[,] matriz1 = new double[qtdLinhas, qtdColunas];
 double[,] matriz2 = new double[qtdLinhas, qtdColunas];
 double[,] matriz3 = new double[qtdLinhas, qtdColunas];
 
+void ImprimirMatriz(double[,] matriz, string titulo)
+{
+    Console.WriteLine();
+    Console.WriteLine(titulo);
+    for (int linha = 0; linha < qtdLinhas; linha++)
+    {
+        Console.WriteLine();
+        for (int coluna = 0; coluna < qtdColunas; coluna++)
+        {
+            Console.Write(matriz[linha, coluna] + " ");
+        }
+    }
+}
+
 //Criacao da matriz 1
 for (int linha = 0; linha < qtdLinhas; linha++)
 {
     for (int coluna = 0; coluna < qtdColunas; coluna++)
     {
-        matriz1[linha, coluna] = new Random().Next(0, 100);
+        matriz1[linha, coluna] = new Random().Next(0, 10);
     }
 }
-//Impressao da matriz 1
-for (int linha = 0; linha < qtdLinhas; linha++)
-{
-    Console.WriteLine();
-    for (int coluna = 0; coluna < qtdColunas; coluna++)
-    {
-        Console.Write(matriz1[linha, coluna] + " ");
-    }
-}
+
+ImprimirMatriz(matriz1, "Matriz 1");
 Console.WriteLine();
+
 //Criacao da matriz 2
 for (int linha = 0; linha < qtdLinhas; linha++)
 {
@@ -29,17 +37,11 @@ for (int linha = 0; linha < qtdLinhas; linha++)
         matriz2[linha, coluna] = new Random().Next(1, 10);
     }
 }
-//Impressao da matriz 2
-for (int linha = 0; linha < qtdLinhas; linha++)
-{
-    Console.WriteLine();
-    for (int coluna = 0; coluna < qtdColunas; coluna++)
-    {
-        Console.Write(matriz2[linha, coluna] + " ");
-    }
-}
-//Criacao da matriz 3 = matriz1 + matriz2
+
+ImprimirMatriz(matriz2, "Matriz 2");
 Console.WriteLine();
+
+//Criacao da matriz 3 = matriz1 + matriz2
 for (int linha = 0; linha < qtdLinhas; linha++)
 {
     for (int coluna = 0; coluna < qtdColunas; coluna++)
@@ -49,16 +51,7 @@ for (int linha = 0; linha < qtdLinhas; linha++)
 }
 
 //Impressao matriz 3 - soma
-Console.WriteLine();
-Console.WriteLine("Resultado soma");
-for (int linha = 0; linha < qtdLinhas; linha++)
-{
-    Console.WriteLine();
-    for (int coluna = 0; coluna < qtdColunas; coluna++)
-    {
-        Console.Write(matriz3[linha, coluna] + " ");
-    }
-}
+ImprimirMatriz(matriz3, "Resultado soma");
 
 for (int linha = 0; linha < qtdLinhas; linha++)
 {
@@ -67,17 +60,8 @@ for (int linha = 0; linha < qtdLinhas; linha++)
         matriz3[linha, coluna] = matriz1[linha, coluna] - matriz2[linha, coluna];
     }
 }
-Console.WriteLine();
-Console.WriteLine("\nResultado subtração");
-//Impressao matriz 3 - subtração
-for (int linha = 0; linha < qtdLinhas; linha++)
-{
-    Console.WriteLine();
-    for (int coluna = 0; coluna < qtdColunas; coluna++)
-    {
-        Console.Write(matriz3[linha, coluna] + " ");
-    }
-}
+
+ImprimirMatriz(matriz3, "\nResultado subtração");
 
 for (int linha = 0; linha < qtdLinhas; linha++)
 {
@@ -86,17 +70,8 @@ for (int linha = 0; linha < qtdLinhas; linha++)
         matriz3[linha, coluna] = matriz1[linha, coluna] * matriz2[linha, coluna];
     }
 }
-Console.WriteLine();
-Console.WriteLine("\nResultado multiplicação");
-//Impressao matriz 3 - multiplicação
-for (int linha = 0; linha < qtdLinhas; linha++)
-{
-    Console.WriteLine();
-    for (int coluna = 0; coluna < qtdColunas; coluna++)
-    {
-        Console.Write(matriz3[linha, coluna] + " ");
-    }
-}
+
+ImprimirMatriz(matriz3, "\nResultado multiplicação");
 
 for (int linha = 0; linha < qtdLinhas; linha++)
 {
@@ -112,14 +87,5 @@ for (int linha = 0; linha < qtdLinhas; linha++)
         }
     }
 }
-Console.WriteLine();
-Console.WriteLine("\nResultado divisão");
-//Impressao matriz 3 - divisão
-for (int linha = 0; linha < qtdLinhas; linha++)
-{
-    Console.WriteLine();
-    for (int coluna = 0; coluna < qtdColunas; coluna++)
-    {
-        Console.Write(matriz3[linha, coluna] + " ");
-    }
-}
+
+ImprimirMatriz(matriz3, "\nResultado divisão");
